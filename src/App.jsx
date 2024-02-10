@@ -1,8 +1,10 @@
+import { Fragment } from "react";
+import { TodoList } from "../component";
 function App() {
   return (
-    <div>
-      <h1>Ankur Halder</h1>
-    </div>
+    <Fragment>
+      <TodoList />
+    </Fragment>
   );
 }
 
