@@ -55,11 +55,12 @@ function TodoList() {
     setPriority(event.target.value);
   };
 
-  // Sort todos based on priority
-  const sortedTodos = todos.sort((a, b) => {
-    const priorityOrder = { high: 1, medium: 2, low: 3 };
-    return priorityOrder[a.priority] - priorityOrder[b.priority];
-  });
+  // Filter todos based on priority
+  const filteredTodos = {
+    high: todos.filter((todo) => todo.priority === "high"),
+    medium: todos.filter((todo) => todo.priority === "medium"),
+    low: todos.filter((todo) => todo.priority === "low"),
+  };
 
   return (
     <div className="todo-list">
@@ -78,34 +79,53 @@ function TodoList() {
       <button onClick={handleAddTodo}>
         {editIndex !== null ? "Update" : "Add"}
       </button>
-      <ul>
-        {sortedTodos.map((todo, index) => (
-          <li
-            key={index}
-            className={`priority-${todo.priority}`}
-            style={{ fontWeight: "bold", color: getColor(todo.priority) }}
-          >
-            {todo.text} ({todo.priority})
-            <button onClick={() => handleEditTodo(index)}>Edit</button>
-            <button onClick={() => handleDeleteTodo(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <div className="priority-section">
+        <h2>High Priority</h2>
+        <ul>
+          {filteredTodos.high.map((todo, index) => (
+            <li
+              key={index}
+              className="priority-high"
+              onClick={() => handleEditTodo(index)}
+            >
+              {todo.text}
+              <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="priority-section">
+        <h2>Medium Priority</h2>
+        <ul>
+          {filteredTodos.medium.map((todo, index) => (
+            <li
+              key={index}
+              className="priority-medium"
+              onClick={() => handleEditTodo(index)}
+            >
+              {todo.text}
+              <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="priority-section">
+        <h2>Low Priority</h2>
+        <ul>
+          {filteredTodos.low.map((todo, index) => (
+            <li
+              key={index}
+              className="priority-low"
+              onClick={() => handleEditTodo(index)}
+            >
+              {todo.text}
+              <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
 
 export default TodoList;
-
-function getColor(priority) {
-  switch (priority) {
-    case "high":
-      return "red";
-    case "medium":
-      return "orange";
-    case "low":
-      return "green";
-    default:
-      return "black";
-  }
-}
