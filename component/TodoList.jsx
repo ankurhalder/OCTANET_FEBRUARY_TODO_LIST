@@ -1,21 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    setTodos(storedTodos);
+  }, []);
+
+  const saveTodosToLocalStorage = (updatedTodos) => {
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  };
+
   const handleAddTodo = () => {
     if (inputValue.trim() !== "") {
       if (editIndex !== null) {
-        // If editIndex is not null, it means we're editing an existing todo
         const updatedTodos = [...todos];
         updatedTodos[editIndex] = inputValue;
         setTodos(updatedTodos);
+        saveTodosToLocalStorage(updatedTodos);
         setEditIndex(null);
       } else {
-        // Otherwise, we're adding a new todo
-        setTodos([...todos, inputValue]);
+        const updatedTodos = [...todos, inputValue];
+        setTodos(updatedTodos);
+        saveTodosToLocalStorage(updatedTodos);
       }
       setInputValue("");
     }
@@ -29,6 +39,7 @@ function TodoList() {
   const handleDeleteTodo = (index) => {
     const updatedTodos = todos.filter((_, i) => i !== index);
     setTodos(updatedTodos);
+    saveTodosToLocalStorage(updatedTodos);
   };
 
   const handleInputChange = (event) => {
