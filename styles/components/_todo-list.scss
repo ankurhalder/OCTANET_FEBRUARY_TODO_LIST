@@ -1,37 +1,83 @@
 .todo-list {
-  .priority-section {
-    margin-top: 20px;
-    ul {
-      list-style-type: none;
-      padding: 0;
-      li {
-        margin-bottom: 10px;
-        cursor: pointer;
-        &:hover {
-          text-decoration: line-through;
-        }
-        button {
-          margin-left: 10px;
-          background-color: transparent;
-          border: none;
-          cursor: pointer;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    grid-column: 1 / -1;
+  }
+
+  input[type="text"],
+  select,
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
     }
   }
 
-  .priority-high {
-    color: red;
-  }
+  .priority-section {
+    h2 {
+      margin-bottom: 10px;
+    }
 
-  .priority-medium {
-    color: orange;
-  }
+    ul {
+      list-style: none;
+      padding: 0;
 
-  .priority-low {
-    color: green;
+      li {
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+          padding: 5px 10px;
+          background-color: #dc3545;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          font-size: 14px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #c82333;
+          }
+        }
+
+        &.priority-high {
+          background-color: #ffc107;
+        }
+
+        &.priority-medium {
+          background-color: #17a2b8;
+        }
+
+        &.priority-low {
+          background-color: #28a745;
+        }
+      }
+    }
   }
 }
