@@ -39,17 +39,21 @@
     }
   }
   button {
+    padding: 12px 24px;
+    margin: 0 0 2% 0;
     background-color: var(--blue-1);
-    color: #fff;
-    border: none;
     border-radius: 8px;
-    font-size: 18px;
+    color: var(--white);
+    font-family: var(--font-elianto);
+    font-size: var(--font-11);
+    letter-spacing: 3px;
+    font-weight: 400;
+    text-transform: uppercase;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
     &:hover {
-      background-color: #0056b3;
+      background-color: var(--blue-2);
       transform: translateY(-2px);
     }
   }
