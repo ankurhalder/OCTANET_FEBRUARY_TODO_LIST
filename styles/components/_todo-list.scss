@@ -3,28 +3,52 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-gap: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 
   h1 {
     text-align: center;
-    margin-bottom: 20px;
-    grid-column: 1 / -1;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+    font-weight: bold;
   }
 
   input[type="text"],
   select,
   button {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
     font-size: 16px;
+    background-color: #fff;
+    color: #555;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #007bff;
+    }
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 4'%3E%3Cpath fill='%23007bff' d='M4 4L0 0h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
   }
 
   button {
     background-color: #007bff;
     color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
@@ -35,7 +59,10 @@
 
   .priority-section {
     h2 {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      color: #555;
+      font-size: 24px;
+      font-weight: bold;
     }
 
     ul {
@@ -43,21 +70,28 @@
       padding: 0;
 
       li {
-        padding: 10px;
-        margin-bottom: 5px;
-        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 10px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: #fff;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+          box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
 
         button {
-          padding: 5px 10px;
+          padding: 10px 20px;
           background-color: #dc3545;
           color: #fff;
           border: none;
-          border-radius: 5px;
-          font-size: 14px;
+          border-radius: 8px;
+          font-size: 16px;
           cursor: pointer;
           transition: background-color 0.3s ease;
 
@@ -67,15 +101,15 @@
         }
 
         &.priority-high {
-          background-color: #ffc107;
+          border-left: 8px solid #ffc107;
         }
 
         &.priority-medium {
-          background-color: #17a2b8;
+          border-left: 8px solid #17a2b8;
         }
 
         &.priority-low {
-          background-color: #28a745;
+          border-left: 8px solid #28a745;
         }
       }
     }
