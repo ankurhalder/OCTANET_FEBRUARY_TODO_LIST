@@ -4,7 +4,7 @@ function TodoList() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [editIndex, setEditIndex] = useState(null);
-  const [priority, setPriority] = useState("high"); // Default priority is high
+  const [priority, setPriority] = useState("high");
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -55,7 +55,6 @@ function TodoList() {
     setPriority(event.target.value);
   };
 
-  // Filter todos based on priority
   const filteredTodos = {
     high: todos.filter((todo) => todo.priority === "high"),
     medium: todos.filter((todo) => todo.priority === "medium"),
