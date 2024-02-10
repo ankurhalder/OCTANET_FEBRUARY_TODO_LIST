@@ -4,7 +4,7 @@ function TodoList() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [editIndex, setEditIndex] = useState(null);
-  const [priority, setPriority] = useState("1"); // Default priority is high
+  const [priority, setPriority] = useState("high"); // Default priority is high
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -19,7 +19,7 @@ function TodoList() {
     if (inputValue.trim() !== "") {
       const newTodo = {
         text: inputValue,
-        priority: parseInt(priority),
+        priority: priority,
       };
       if (editIndex !== null) {
         const updatedTodos = [...todos];
@@ -37,7 +37,7 @@ function TodoList() {
 
   const handleEditTodo = (index) => {
     setInputValue(todos[index].text);
-    setPriority(todos[index].priority.toString());
+    setPriority(todos[index].priority);
     setEditIndex(index);
   };
 
@@ -55,6 +55,12 @@ function TodoList() {
     setPriority(event.target.value);
   };
 
+  // Sort todos based on priority
+  const sortedTodos = todos.sort((a, b) => {
+    const priorityOrder = { high: 1, medium: 2, low: 3 };
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
+  });
+
   return (
     <div className="todo-list">
       <h1>Todo List</h1>
@@ -65,18 +71,21 @@ function TodoList() {
         onChange={handleInputChange}
       />
       <select value={priority} onChange={handlePriorityChange}>
-        <option value="1">High</option>
-        <option value="2">Medium</option>
-        <option value="3">Low</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
       </select>
       <button onClick={handleAddTodo}>
         {editIndex !== null ? "Update" : "Add"}
       </button>
       <ul>
-        {todos.map((todo, index) => (
-          <li key={index} className={`priority-${todo.priority}`}>
-            {todo.text}
-            <span className="priority">Priority: {todo.priority}</span>
+        {sortedTodos.map((todo, index) => (
+          <li
+            key={index}
+            className={`priority-${todo.priority}`}
+            style={{ fontWeight: "bold", color: getColor(todo.priority) }}
+          >
+            {todo.text} ({todo.priority})
             <button onClick={() => handleEditTodo(index)}>Edit</button>
             <button onClick={() => handleDeleteTodo(index)}>Delete</button>
           </li>
@@ -87,3 +96,16 @@ function TodoList() {
 }
 
 export default TodoList;
+
+function getColor(priority) {
+  switch (priority) {
+    case "high":
+      return "red";
+    case "medium":
+      return "orange";
+    case "low":
+      return "green";
+    default:
+      return "black";
+  }
+}
