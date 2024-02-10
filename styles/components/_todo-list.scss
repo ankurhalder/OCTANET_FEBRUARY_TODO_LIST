@@ -28,10 +28,11 @@
     font-size: 16px;
     background-color: #fff;
     color: #555;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
     &:focus {
       border-color: #007bff;
+      box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
     }
   }
 
@@ -50,10 +51,11 @@
     border-radius: 8px;
     font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 
     &:hover {
       background-color: #0056b3;
+      transform: translateY(-2px);
     }
   }
 
@@ -93,10 +95,11 @@
           border-radius: 8px;
           font-size: 16px;
           cursor: pointer;
-          transition: background-color 0.3s ease;
+          transition: background-color 0.3s ease, transform 0.2s ease;
 
           &:hover {
             background-color: #c82333;
+            transform: translateY(-2px);
           }
         }
 
@@ -110,6 +113,23 @@
 
         &.priority-low {
           border-left: 8px solid #28a745;
+        }
+
+        &::before {
+          content: "";
+          width: 10px;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.1);
+          position: absolute;
+          left: -10px;
+          top: 0;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          transition: background-color 0.3s ease;
+        }
+
+        &:hover::before {
+          background-color: rgba(0, 0, 0, 0.2);
         }
       }
     }
