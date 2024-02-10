@@ -64,10 +64,10 @@ function TodoList() {
   return (
     <Fragment>
       <div className="todo-list-container">
-        <h1>Todo List</h1>
+        <h1>My Toodle</h1>
         <input
           type="text"
-          placeholder="Add new todo"
+          placeholder="Type your todo here..."
           value={inputValue}
           onChange={handleInputChange}
         />
