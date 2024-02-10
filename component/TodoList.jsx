@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -62,68 +62,78 @@ function TodoList() {
   };
 
   return (
-    <div className="todo-list">
-      <h1>Todo List</h1>
-      <input
-        type="text"
-        placeholder="Add new todo"
-        value={inputValue}
-        onChange={handleInputChange}
-      />
-      <select value={priority} onChange={handlePriorityChange}>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-      <button onClick={handleAddTodo}>
-        {editIndex !== null ? "Update" : "Add"}
-      </button>
-      <div className="priority-section">
-        <h2>High Priority</h2>
-        <ul>
-          {filteredTodos.high.map((todo, index) => (
-            <li
-              key={index}
-              className="priority-high"
-              onClick={() => handleEditTodo(index)}
-            >
-              {todo.text}
-              <button onClick={() => handleDeleteTodo(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+    <Fragment>
+      <div className="todo-list-container">
+        <h1>Todo List</h1>
+        <input
+          type="text"
+          placeholder="Add new todo"
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+        <select value={priority} onChange={handlePriorityChange}>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <button onClick={handleAddTodo}>
+          {editIndex !== null ? "Update" : "Add"}
+        </button>
+        <div className="todo-list">
+          <div className="priority-section">
+            <h2>High Priority</h2>
+            <ul>
+              {filteredTodos.high.map((todo, index) => (
+                <li
+                  key={index}
+                  className="priority-high"
+                  onClick={() => handleEditTodo(index)}
+                >
+                  {todo.text}
+                  <button onClick={() => handleDeleteTodo(index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="priority-section">
+            <h2>Medium Priority</h2>
+            <ul>
+              {filteredTodos.medium.map((todo, index) => (
+                <li
+                  key={index}
+                  className="priority-medium"
+                  onClick={() => handleEditTodo(index)}
+                >
+                  {todo.text}
+                  <button onClick={() => handleDeleteTodo(index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="priority-section">
+            <h2>Low Priority</h2>
+            <ul>
+              {filteredTodos.low.map((todo, index) => (
+                <li
+                  key={index}
+                  className="priority-low"
+                  onClick={() => handleEditTodo(index)}
+                >
+                  {todo.text}
+                  <button onClick={() => handleDeleteTodo(index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
-      <div className="priority-section">
-        <h2>Medium Priority</h2>
-        <ul>
-          {filteredTodos.medium.map((todo, index) => (
-            <li
-              key={index}
-              className="priority-medium"
-              onClick={() => handleEditTodo(index)}
-            >
-              {todo.text}
-              <button onClick={() => handleDeleteTodo(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="priority-section">
-        <h2>Low Priority</h2>
-        <ul>
-          {filteredTodos.low.map((todo, index) => (
-            <li
-              key={index}
-              className="priority-low"
-              onClick={() => handleEditTodo(index)}
-            >
-              {todo.text}
-              <button onClick={() => handleDeleteTodo(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    </Fragment>
   );
 }
 
