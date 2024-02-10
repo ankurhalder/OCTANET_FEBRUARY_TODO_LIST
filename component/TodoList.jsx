@@ -16,7 +16,7 @@ function TodoList() {
   };
 
   return (
-    <div>
+    <div className="todo-list">
       <h1>Todo List</h1>
       <input
         type="text"
