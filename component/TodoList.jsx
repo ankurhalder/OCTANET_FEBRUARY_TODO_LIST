@@ -26,20 +26,20 @@ function TodoList() {
         updatedTodos[editIndex] = newTodo;
         setTodos(updatedTodos);
         setEditIndex(null);
-        saveTodosToLocalStorage(updatedTodos); // Move the save function here
+        saveTodosToLocalStorage(updatedTodos);
       } else {
         const updatedTodos = [...todos, newTodo];
         setTodos(updatedTodos);
-        saveTodosToLocalStorage(updatedTodos); // Move the save function here
+        saveTodosToLocalStorage(updatedTodos);
       }
       setInputValue("");
     }
   };
 
-  const handleEditTodo = (index) => {
-    setInputValue(todos[index].text);
-    setPriority(todos[index].priority);
-    setEditIndex(index);
+  const handleEditTodo = (todo) => {
+    setInputValue(todo.text);
+    setPriority(todo.priority);
+    setEditIndex(todos.indexOf(todo));
   };
 
   const handleDeleteTodo = (index) => {
@@ -88,7 +88,7 @@ function TodoList() {
                 <li
                   key={index}
                   className="priority-high"
-                  onClick={() => handleEditTodo(index)}
+                  onClick={() => handleEditTodo(todo)}
                 >
                   {todo.text}
                   <button onClick={() => handleDeleteTodo(index)}>
@@ -105,7 +105,7 @@ function TodoList() {
                 <li
                   key={index}
                   className="priority-medium"
-                  onClick={() => handleEditTodo(index)}
+                  onClick={() => handleEditTodo(todo)}
                 >
                   {todo.text}
                   <button onClick={() => handleDeleteTodo(index)}>
@@ -122,7 +122,7 @@ function TodoList() {
                 <li
                   key={index}
                   className="priority-low"
-                  onClick={() => handleEditTodo(index)}
+                  onClick={() => handleEditTodo(todo)}
                 >
                   {todo.text}
                   <button onClick={() => handleDeleteTodo(index)}>
