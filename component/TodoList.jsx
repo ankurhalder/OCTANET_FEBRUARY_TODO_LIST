@@ -26,11 +26,12 @@ function TodoList() {
         updatedTodos[editIndex] = newTodo;
         setTodos(updatedTodos);
         setEditIndex(null);
+        saveTodosToLocalStorage(updatedTodos); // Move the save function here
       } else {
         const updatedTodos = [...todos, newTodo];
         setTodos(updatedTodos);
+        saveTodosToLocalStorage(updatedTodos); // Move the save function here
       }
-      saveTodosToLocalStorage(todos);
       setInputValue("");
     }
   };
